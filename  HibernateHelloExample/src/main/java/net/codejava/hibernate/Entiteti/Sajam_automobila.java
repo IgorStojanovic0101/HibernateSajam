@@ -1,4 +1,4 @@
-package net.codejava.hibernate;
+package net.codejava.hibernate.Entiteti;
 
 import javax.persistence.*;
 

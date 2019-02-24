@@ -6,11 +6,22 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import net.codejava.hibernate.Entiteti.Sajam_automobila;
+
 public class SajamManager {
 	
 	
 	    protected SessionFactory sessionFactory;
-	 
+	   public SajamManager()
+	   {
+		   setup();
+	   }
+	   @Override
+	    public void finalize() throws Throwable {
+	       exit();
+	    }
+	   
+	   
 	    protected void setup() {
 	    	final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
 	    	        .configure() // configures settings from hibernate.cfg.xml
@@ -27,33 +38,31 @@ public class SajamManager {
 	    	sessionFactory.close();
 	    }
 	 
-	    protected void create() {
-	    	Sajam_automobila book = new Sajam_automobila();
-	    	    book.setNaziv("Hibrid");
-	    	    book.setMesto("Nis");
+	    protected void create(String naziv, String mesto) {
+	    	Sajam_automobila sajam = new Sajam_automobila();
+	    	    sajam.setNaziv(naziv);
+	    	    sajam.setMesto(mesto);
 	    	   
 	    	 
 	    	    Session session = sessionFactory.openSession();
 	    	    session.beginTransaction();
 	    	 
-	    	    session.save(book);
+	    	    session.save(sajam);
 	    	 
 	    	    session.getTransaction().commit();
 	    	    session.close();
 	    }
 	 
-	    protected void read() {
+	    protected String read() {
 	    	Session session = sessionFactory.openSession();
 	    	 
-	        long id = 2;
+	        long id = 1;
 	        Sajam_automobila book = session.get(Sajam_automobila.class, id);
-	     
-	        System.out.println("Naziv: " + book.getNaziv());
-	        System.out.println("Mesto: " + book.getMesto());
-	     
 	        session.close();
-	    }
-	 
+	   
+	     return "Naziv: " + book.getNaziv() +"Mesto: " + book.getMesto();
+	      }  
+	   
 	    protected void update() {
 	    	  Sajam_automobila book = new  Sajam_automobila();
 	    	    book.setId(2);
@@ -82,15 +91,6 @@ public class SajamManager {
 	    	    session.getTransaction().commit();
 	    	    session.close();
 	    }
-	public static void main(String[] args) {
-		SajamManager manager = new SajamManager();
-	    manager.setup();
-	    manager.update();
-	 
-	    manager.read(); 
-	    manager.delete();
-	    manager.exit();
-
-	}
+	
 
 }
