@@ -6,7 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class BookManager {
+public class SajamManager {
 	
 	
 	    protected SessionFactory sessionFactory;
@@ -83,7 +83,7 @@ public class BookManager {
 	    	    session.close();
 	    }
 	public static void main(String[] args) {
-		BookManager manager = new BookManager();
+		SajamManager manager = new SajamManager();
 	    manager.setup();
 	    manager.update();
 	 
