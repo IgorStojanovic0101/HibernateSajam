@@ -1,5 +1,8 @@
 package net.codejava.hibernate.Entiteti;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -8,9 +11,12 @@ import javax.persistence.*;
 @Table(name = "sajam_automobila")
 public class Sajam_automobila {
 		
-	    private long id;
+	    private long sajam_id;
 	    private String naziv;
 	    private String mesto;
+	    
+	 
+	    private List<Auto> automobili = new ArrayList<Auto>();
 	    
 	 
 	    public Sajam_automobila() {
@@ -18,19 +24,19 @@ public class Sajam_automobila {
 	    public Sajam_automobila(long id,String naziv,String mesto)
 	    {
 	    	super();
-	    	this.id=id;
+	    	this.sajam_id=id;
 	    	this.naziv=naziv;
 	    	this.mesto=mesto;
 	    }
 	    @Id
-	    @Column(name = "id")
+	    @Column(name = "sajam_id")
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    public long getId() {
-	        return id;
+	        return sajam_id;
 	    }
 	 
 	    public void setId(long id) {
-	        this.id = id;
+	        this.sajam_id = id;
 	    }
 	 
 	    public String getNaziv() {
@@ -46,6 +52,15 @@ public class Sajam_automobila {
 	 
 	    public void setMesto(String mesto) {
 	        this.mesto = mesto;
+	    }
+	    @OneToMany(targetEntity=Auto.class,mappedBy="sajam_automobila",cascade=CascadeType.ALL)
+	    public List<Auto>  getAutomobili()
+	    {
+	    	return this.automobili;
+	    }
+	    public void setAutomobili(List<Auto> automobili)
+	    {
+	    	this.automobili=automobili;
 	    }
 	 
 	  

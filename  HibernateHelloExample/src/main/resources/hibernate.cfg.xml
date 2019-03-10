@@ -12,6 +12,7 @@
     <property name="show_sql">true</property>
         
     <mapping class="net.codejava.hibernate.Entiteti.Sajam_automobila" />
+    <mapping class="net.codejava.hibernate.Entiteti.Auto"/>
      
   </session-factory>
 </hibernate-configuration>

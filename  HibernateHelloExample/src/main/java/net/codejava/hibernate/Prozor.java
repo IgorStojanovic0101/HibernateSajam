@@ -9,6 +9,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+
+import Admin.AdminView;
+import User.UserView;
+
 import java.awt.Toolkit;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -21,7 +25,7 @@ public class Prozor {
 	public JTextField tb1;
 	public JTextField tb2;
 	private JLabel lblMesto;
-	private JLabel label;
+	public JLabel izabrano;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -105,9 +109,34 @@ public class Prozor {
 		lblMesto.setBounds(196, 278, 46, 14);
 		frame.getContentPane().add(lblMesto);
 		
-		label = new JLabel("");
-		label.setIcon(new ImageIcon("F:\\slike\\life picture\\DSC_5402.jpg"));
-		label.setBounds(0, 0, 434, 345);
-		frame.getContentPane().add(label);
+		JLabel lblAdmin = new JLabel("Admin");
+		lblAdmin.setBounds(62, 48, 46, 14);
+		frame.getContentPane().add(lblAdmin);
+		
+		JLabel lblUser = new JLabel("User");
+		lblUser.setBounds(62, 90, 46, 14);
+		frame.getContentPane().add(lblUser);
+		
+		JButton btnDugme = new JButton("dugme1");
+		btnDugme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controlor.ActionAdmin();
+			}
+		});
+		btnDugme.setBounds(130, 44, 89, 23);
+		frame.getContentPane().add(btnDugme);
+		
+		JButton btnDugme_1 = new JButton("dugme2");
+		btnDugme_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				controlor.ActionUser();
+			}
+		});
+		btnDugme_1.setBounds(130, 90, 89, 23);
+		frame.getContentPane().add(btnDugme_1);
+		
+		 izabrano = new JLabel("");
+		izabrano.setBounds(158, 207, 140, 14);
+		frame.getContentPane().add(izabrano);
 	}
 }
