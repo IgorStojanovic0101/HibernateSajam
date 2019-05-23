@@ -8,12 +8,16 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Admin.AdminStrategy;
+
 import javax.swing.JLabel;
 
 public class UserView extends JFrame {
 
 	private JFrame frame;
 	public JLabel l1;
+	public UserStrategy us;
 	
 	
 	public UserView() {
@@ -27,9 +31,14 @@ public class UserView extends JFrame {
 		frame.getContentPane().add(l1, BorderLayout.NORTH);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\slike\\life picture\\o-music-heart-facebook.jpg"));
 		frame.setBounds(100, 100, 450, 394);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		frame.setVisible(true);
+	}
+	
+	public void SetControler(UserStrategy strategy)
+	{
+		this.us=strategy;
 	}
 
 }

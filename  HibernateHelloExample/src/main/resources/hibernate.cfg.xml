@@ -11,8 +11,9 @@
     <property name="connection.password"></property>
     <property name="show_sql">true</property>
         
-    <mapping class="net.codejava.hibernate.Entiteti.Sajam_automobila" />
-    <mapping class="net.codejava.hibernate.Entiteti.Auto"/>
+    <mapping class="Entiteti.Sajam_automobila" />
+    <mapping class="Entiteti.Auto"/>
+    <mapping class="Entiteti.Korisnici"/>
      
   </session-factory>
 </hibernate-configuration>

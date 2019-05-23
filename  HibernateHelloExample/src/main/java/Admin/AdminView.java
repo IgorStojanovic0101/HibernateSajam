@@ -1,6 +1,6 @@
 package Admin;
 
-import java.awt.BorderLayout;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
@@ -15,7 +15,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import net.codejava.hibernate.Entiteti.Sajam_automobila;
+import Entiteti.Auto;
+import Entiteti.Sajam_automobila;
+import SignIn.SajamManager;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -29,20 +31,14 @@ import javax.swing.JTable;
 public class AdminView  {
 	
 	private JFrame frame;
-	public JLabel l2;
-	public JTextField marka_auto;
-	public JTextField naziv_auto;
-	public JTextField boja_auto;
-	public JTextField poreklo_auto;
-	public JTextField ks_auto;
-	public JTextField cena_auto;
-	public JTextField broj_sedista_auto;
-	public JButton btnUnesi;
+
 	
-	private JTable table;
-	private DefaultTableModel model;
+	private JTable table,table2;
+	public DefaultTableModel model;
+	public DefaultTableModel model2;
 	private JTextField naziv_sajma;
 	private JTextField mesto_sajma;
+	public JLabel l2;
 	
 	
 	
@@ -61,98 +57,10 @@ public class AdminView  {
 		l2.setBounds(0, 0, 434, 0);
 		frame.getContentPane().add(l2);
 		
-		JLabel lblUnesiAuto = new JLabel("Unesi auto");
-		lblUnesiAuto.setBounds(24, 102, 111, 14);
-		frame.getContentPane().add(lblUnesiAuto);
 		
-		JLabel naziv = new JLabel("Naziv");
-		naziv.setBounds(49, 144, 46, 14);
-		frame.getContentPane().add(naziv);
+			
+	
 		
-		JLabel lblMarka = new JLabel("Marka");
-		lblMarka.setBounds(49, 172, 46, 14);
-		frame.getContentPane().add(lblMarka);
-		
-		JLabel BOJA = new JLabel("Boja");
-		BOJA.setBounds(53, 203, 46, 14);
-		frame.getContentPane().add(BOJA);
-		
-		JLabel lblPoreklo = new JLabel("Poreklo");
-		lblPoreklo.setBounds(49, 244, 46, 14);
-		frame.getContentPane().add(lblPoreklo);
-		
-		JLabel lblKonjaskaSnaga = new JLabel("Konjaska snaga");
-		lblKonjaskaSnaga.setBounds(24, 294, 86, 14);
-		frame.getContentPane().add(lblKonjaskaSnaga);
-		
-		JLabel lblCena = new JLabel("Cena");
-		lblCena.setBounds(53, 348, 46, 14);
-		frame.getContentPane().add(lblCena);
-		
-		marka_auto = new JTextField();
-		marka_auto.setBounds(105, 169, 86, 20);
-		frame.getContentPane().add(marka_auto);
-		marka_auto.setColumns(10);
-		
-		naziv_auto = new JTextField();
-		naziv_auto.setBounds(105, 141, 86, 20);
-		frame.getContentPane().add(naziv_auto);
-		naziv_auto.setColumns(10);
-		
-		boja_auto = new JTextField();
-		boja_auto.setBounds(105, 200, 86, 20);
-		frame.getContentPane().add(boja_auto);
-		boja_auto.setColumns(10);
-		
-		poreklo_auto = new JTextField();
-		poreklo_auto.setBounds(105, 241, 86, 20);
-		frame.getContentPane().add(poreklo_auto);
-		poreklo_auto.setColumns(10);
-		
-		ks_auto = new JTextField();
-		ks_auto.setBounds(105, 291, 86, 20);
-		frame.getContentPane().add(ks_auto);
-		ks_auto.setColumns(10);
-		
-		cena_auto = new JTextField();
-		cena_auto.setBounds(105, 345, 86, 20);
-		frame.getContentPane().add(cena_auto);
-		cena_auto.setColumns(10);
-		
-		btnUnesi = new JButton("Unesi");
-		btnUnesi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String naziv=naziv_auto.getText();
-				String marka=marka_auto.getText();
-				String boja=boja_auto.getText();
-				String poreklo=poreklo_auto.getText();
-				int konji=Integer.parseInt(ks_auto.getText());
-				int broj_sedista=Integer.parseInt(broj_sedista_auto.getText());
-				int cena=Integer.parseInt(cena_auto.getText());
-				as.InsertAuto(naziv, marka, boja, poreklo, konji, broj_sedista, cena);
-			}
-		});
-		
-		btnUnesi.setBounds(84, 405, 89, 23);
-		frame.getContentPane().add(btnUnesi);
-		
-		JLabel lblBrojsedista = new JLabel("Broj_sedista");
-		lblBrojsedista.setBounds(30, 269, 80, 14);
-		frame.getContentPane().add(lblBrojsedista);
-		
-		broj_sedista_auto = new JTextField();
-		broj_sedista_auto.setBounds(105, 266, 86, 20);
-		frame.getContentPane().add(broj_sedista_auto);
-		broj_sedista_auto.setColumns(10);
-		
-		JButton btnOneToMany = new JButton("One to Many");
-		btnOneToMany.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				as.OneToManyInsert();
-			}
-		});
-		btnOneToMany.setBounds(58, 21, 133, 23);
-		frame.getContentPane().add(btnOneToMany);
 		
 		JButton btnLista = new JButton("Lista");
 		//Table--------------------------------------------------------
@@ -177,7 +85,8 @@ public class AdminView  {
 	        frame.getContentPane().setLayout(null);
 	        frame.getContentPane().add(pane);
 	       
-		
+		//Table2 --------------------------------------------------------
+	     Table2();
 		
 		btnLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -198,9 +107,69 @@ public class AdminView  {
 			        
 			}
 		}); 
-		
-		btnLista.setBounds(239, 222, 89, 23);
+		btnLista.setBounds(239, 222, 178, 50);
 		frame.getContentPane().add(btnLista);
+		
+		
+		
+		
+		
+		
+		
+		JButton btnLista2 = new JButton("Lista2");
+		btnLista2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deleteAllrows(model2);
+				  int index = table.getSelectedRow();
+				  System.out.println("OVO JE INDEX"+index);
+				  if(index<0)
+				  {
+				 List<Auto> lista=as.getAutos();
+			       
+			        Object[] row = new Object[8];
+			        for(int i=0;i<lista.size();i++)
+			        {
+			        	 Object o = (Object)lista.get(i);
+			             Auto p = (Auto)o; 
+			             row[0] = p.getId();
+			             row[1] = p.getNaziv();
+			             row[2] = p.getMarka();
+			             row[3] = p.getBoja();
+			             row[4] = p.getPoreklo();
+			             row[5] = p.getKs();
+			             row[6] = p.getBroj_sedista();
+			             row[7] = p.getCena();
+			        	
+			             model2.addRow(row);
+			        }
+				  }
+				  else {
+					  int id_sajma =Integer.parseInt(model.getValueAt(index, 0).toString());
+						 List<Auto> lista=as.getOdredjeniAutomobili(id_sajma);
+					       
+					        Object[] row = new Object[8];
+					        for(int i=0;i<lista.size();i++)
+					        {
+					        	 Object o = (Object)lista.get(i);
+					             Auto p = (Auto)o; 
+					             row[0] = p.getId();
+					             row[1] = p.getNaziv();
+					             row[2] = p.getMarka();
+					             row[3] = p.getBoja();
+					             row[4] = p.getPoreklo();
+					             row[5] = p.getKs();
+					             row[6] = p.getBroj_sedista();
+					             row[7] = p.getCena();
+					        	
+					             model2.addRow(row);
+					        }
+					  
+				  }
+			        
+			}
+		}); 
+		btnLista2.setBounds(586, 222, 134, 50);
+		frame.getContentPane().add(btnLista2);
 		
 		naziv_sajma = new JTextField();
 		naziv_sajma.setBounds(239, 291, 86, 20);
@@ -269,25 +238,66 @@ public class AdminView  {
 		btnBrisi.setBounds(239, 424, 89, 23);
 		frame.getContentPane().add(btnBrisi);
 		
+		JButton btnAutomobliNaSajmu = new JButton("Automobli na sajmu");
+		btnAutomobliNaSajmu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AutomobiliView frame = new AutomobiliView();
+					AutomobiliControler ac=new AutomobiliControler(as.getSajam(),frame);
+					frame.setControler(ac);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnAutomobliNaSajmu.setBounds(49, 55, 142, 23);
+		frame.getContentPane().add(btnAutomobliNaSajmu);
+		
       
 		
 		
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("F:\\slike\\life picture\\o-music-heart-facebook.jpg"));
-		frame.setBounds(100, 100, 919, 547);
+		frame.setBounds(100, 100, 994, 547);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setVisible(true);
 	}
-	public void deleteAllrows(DefaultTableModel model)
+	public void Table2() {
+		   table2 = new JTable(); 
+					String vrste2[]= {"Id","Naziv","Marka","Boja","Poreklo","Snaga","Broj sedista","Cena"};
+					///////////////
+				    model2 = new DefaultTableModel();
+			        model2.setColumnIdentifiers(vrste2);
+			        
+			        // set the model to the table
+			        table2.setModel(model2);
+			        
+			        // Change A JTable Background Color, Font Size, Font Color, Row Height
+			        table2.setBackground(Color.LIGHT_GRAY);
+			        table2.setForeground(Color.black);
+			        Font font2 = new Font("",1,22);
+			        table2.setFont(font2);
+			        table2.setRowHeight(30);
+			        // create JScrollPane
+			        JScrollPane pane2 = new JScrollPane(table2);
+			        pane2.setBounds(368, 281, 600, 200);
+			        frame.getContentPane().setLayout(null);
+			        frame.getContentPane().add(pane2);
+			        
+			    	
+	}
+	public void deleteAllrows(DefaultTableModel modeld)
 	{
-		int rowCount = model.getRowCount();
+		int rowCount = modeld.getRowCount();
 		//Remove rows one by one from the end of the table
 		for (int i = rowCount - 1; i >= 0; i--) {
-		    model.removeRow(i);
+		    modeld.removeRow(i);
 		}
 	}
 	public void SetControler(AdminStrategy strategy)
 	{
 		this.as=strategy;
 	}
+	
 }

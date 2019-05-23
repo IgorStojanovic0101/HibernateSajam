@@ -1,9 +1,8 @@
 package User;
 import Admin.AdminView;
-import net.codejava.hibernate.ControlorStrategy;
-import net.codejava.hibernate.SajamManager;
+import SignIn.SajamManager;
 
-public class UserStrategy implements ControlorStrategy {
+public class UserStrategy  {
 	
 	private SajamManager sajam;
 	private UserView prozor;

@@ -1,14 +1,12 @@
 package Admin;
-import net.codejava.hibernate.Entiteti.*;
-
 import java.util.List;
 
-import net.codejava.hibernate.ControlorStrategy;
-import net.codejava.hibernate.Prozor;
-import net.codejava.hibernate.SajamManager;
+import Entiteti.*;
+import SignIn.Prozor;
+import SignIn.SajamManager;
 
-public class AdminStrategy implements ControlorStrategy {
-	private SajamManager sajam;
+public class AdminStrategy  {
+	public SajamManager sajam;
 	private AdminView prozor;
 	
 	public AdminStrategy(SajamManager sajam,AdminView prozor)
@@ -17,7 +15,17 @@ public class AdminStrategy implements ControlorStrategy {
 		this.prozor=prozor;
 		this.StampajNaslov();
 		
-		
+	
+	}
+	public AdminStrategy(SajamManager sajam)
+	{
+		this.sajam=sajam;
+	
+	}
+	
+	public SajamManager getSajam()
+	{
+		return this.sajam;
 	}
 	public String execute() {
 		return "Admin mod!";
@@ -27,16 +35,7 @@ public class AdminStrategy implements ControlorStrategy {
 		prozor.l2.setText(this.execute());
 	}
 
-	public void InsertAuto(String naziv,String marka,
-	String boja,
-	String poreklo,
-	int konji,
-	int broj_sedista,
-	int cena)
-	{
-		
-		this.sajam.InsertAuto(naziv, marka, boja, poreklo, konji, broj_sedista, cena);
-	}
+
 	public void OneToManyInsert() {
 		sajam.OneToMany();
 		
@@ -48,6 +47,14 @@ public class AdminStrategy implements ControlorStrategy {
 	public List<Sajam_automobila> getSajams()
 	{
 		return this.sajam.ListSajma();
+	}
+	public List<Auto>getAutos()
+	{
+		return this.sajam.ListAuto();
+	}
+	public List<Auto> getOdredjeniAutomobili(int id_sajma)
+	{
+		return this.sajam.ListaAutomobilaNaSajmu(id_sajma);
 	}
 	public int getVelicinaSajma()
 	{
@@ -65,6 +72,7 @@ public class AdminStrategy implements ControlorStrategy {
 	{
 		this.sajam.DeleteSajam(id);
 	}
+	
 	
 	
 }
